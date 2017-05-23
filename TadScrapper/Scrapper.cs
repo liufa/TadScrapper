@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace TadScrapper
 {
-    class Program
+    public class Scrapper : IDisposable
     {
-        static void Main(string[] args)
+
+        public Scrapper()
         {
-            var scrapper = new Scrapper();
+
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
