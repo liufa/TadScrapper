@@ -20,7 +20,8 @@ namespace TadScrapper
                 {
                     foreach (var address in addressFileLines.Skip(1))
                     {
-                        var tadRecord = scrapper.ReadAddress(address);
+                        var tadRecord = scrapper.ReadAddress(address.Split(new[] { ','})[0]).ToList();
+                        
                     }
                 }
             }
