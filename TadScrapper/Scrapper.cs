@@ -22,7 +22,7 @@ namespace TadScrapper
             this.UriBase = new Uri(ConfigurationManager.AppSettings["UriBase"]);
         }
 
-        public IEnumerable<TadRecord> ReadAddress(string address)
+        public IEnumerable<TadRecord> ReadTadRecord(string address)
         {
             var addressesWithPluses = address.Replace(" ", "+");
             this.Driver.Url = $"{this.UriBase}?keyword={addressesWithPluses}&count=2&city=all&DepartmentCd=";

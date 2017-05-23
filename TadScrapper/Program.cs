@@ -20,8 +20,14 @@ namespace TadScrapper
                 {
                     foreach (var address in addressFileLines.Skip(1))
                     {
-                        var tadRecord = scrapper.ReadAddress(address.Split(new[] { ','})[0]).ToList();
-                        
+                        var tadRecords = scrapper.ReadTadRecord(address.Split(new[] { ',' })[0]).ToList();
+                        foreach (var tadRecord in tadRecords)
+                        {
+                            File.AppendAllLines("result.csv", new[]
+                            {
+                                $"{DateTime.Now},{tadRecord.Account},{tadRecord.Location},{tadRecord.City},{tadRecord.OwnerName},{tadRecord.Use},{tadRecord.MarketValue}"
+                            });
+                        }
                     }
                 }
             }
