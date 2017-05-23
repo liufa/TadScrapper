@@ -18,8 +18,10 @@ namespace TadScrapper
 
                 using (var scrapper = new Scrapper())
                 {
-
-
+                    foreach (var address in addressFileLines.Skip(1))
+                    {
+                        var tadRecord = scrapper.ReadAddress(address);
+                    }
                 }
             }
             catch (Exception e)

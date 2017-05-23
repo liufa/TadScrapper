@@ -23,7 +23,11 @@ namespace TadScrapper
 
         public List<TadRecord> ReadAddress(string address)
         {
-            throw new NotImplementedException();
+            var addressesWithPluses = address.Replace(" ", "+");
+            this.Driver.Url = $"{this.UriBase}?keyword={addressesWithPluses}&count=2&city=all&DepartmentCd=";
+            this.Driver.Navigate();
+
+            return null;
         }
 
         public void Dispose()
