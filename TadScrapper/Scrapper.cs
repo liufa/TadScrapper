@@ -20,7 +20,7 @@ namespace TadScrapper
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            this.Driver.Close();
         }
     }
 }

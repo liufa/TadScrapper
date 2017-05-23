@@ -10,7 +10,10 @@ namespace TadScrapper
     {
         static void Main(string[] args)
         {
-            var scrapper = new Scrapper();
+            using (var scrapper = new Scrapper())
+            {
+
+            }
         }
     }
 }
