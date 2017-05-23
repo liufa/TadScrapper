@@ -18,6 +18,8 @@ namespace TadScrapper
             this.Driver = new ChromeDriver();
         }
 
+
+
         public void Dispose()
         {
             this.Driver.Close();
