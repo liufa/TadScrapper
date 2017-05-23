@@ -9,6 +9,7 @@ namespace TadScrapper
     {
         static void Main(string[] args)
         {
+            Scrapper scrapper = null;
             try
             {
                 var addressFileLines = File.ReadAllLines(ConfigurationManager.AppSettings["AddressFileName"]);
@@ -24,7 +25,7 @@ namespace TadScrapper
                                  "Date,Account,Location,City,Owner Name,Use,Market Value $"
                             });
 
-                using (var scrapper = new Scrapper())
+                using (scrapper = new Scrapper())
                 {
                     foreach (var address in addressFileLines.Skip(1))
                     {
@@ -42,6 +43,10 @@ namespace TadScrapper
             catch (Exception e)
             {
                 File.AppendAllLines("log.txt", new[] { String.Empty, DateTime.Now.ToString(), e.Message, e.StackTrace });
+            }
+            finally
+            {
+                scrapper?.Dispose();
             }
         }
     }
