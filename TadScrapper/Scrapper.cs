@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Configuration;
 
 namespace TadScrapper
 {
@@ -13,12 +13,18 @@ namespace TadScrapper
     {
         public IWebDriver Driver;
 
+        public Uri UriBase;
+
         public Scrapper()
         {
             this.Driver = new ChromeDriver();
+            this.UriBase = new Uri(ConfigurationManager.AppSettings["UriBase"]);
         }
 
-
+        public List<TadRecord> ReadAddress(string address)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Dispose()
         {

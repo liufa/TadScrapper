@@ -11,16 +11,16 @@ namespace TadScrapper
     {
         static void Main(string[] args)
         {
-            try
+            using (var scrapper = new Scrapper())
             {
-                using (var scrapper = new Scrapper())
+                try
                 {
 
                 }
-            }
-            catch (Exception e)
-            {
-                File.AppendAllLines("log.txt", new[] { String.Empty, DateTime.Now.ToString(), e.Message, e.StackTrace });
+                catch (Exception e)
+                {
+                    File.AppendAllLines("log.txt", new[] { String.Empty, DateTime.Now.ToString(), e.Message, e.StackTrace });
+                }
             }
         }
     }
