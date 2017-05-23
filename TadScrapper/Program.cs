@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TadScrapper
 {
@@ -15,6 +12,12 @@ namespace TadScrapper
             try
             {
                 var addressFileLines = File.ReadAllLines(ConfigurationManager.AppSettings["AddressFileName"]);
+                var resultFileName = ConfigurationManager.AppSettings["ResultsFileName"];
+                if (File.Exists(resultFileName))
+                {
+                    var filenameParts = resultFileName.Split('.');
+                    resultFileName = filenameParts[0] + DateTime.Now.ToString("yyyy-MM-dd HHmmss") +"."+filenameParts[1];
+                }
 
                 using (var scrapper = new Scrapper())
                 {
@@ -23,7 +26,7 @@ namespace TadScrapper
                         var tadRecords = scrapper.ReadTadRecord(address.Split(new[] { ',' })[0]).ToList();
                         foreach (var tadRecord in tadRecords)
                         {
-                            File.AppendAllLines("result.csv", new[]
+                            File.AppendAllLines(resultFileName, new[]
                             {
                                 $"{DateTime.Now},{tadRecord.Account},{tadRecord.Location},{tadRecord.City},{tadRecord.OwnerName},{tadRecord.Use},{tadRecord.MarketValue}"
                             });

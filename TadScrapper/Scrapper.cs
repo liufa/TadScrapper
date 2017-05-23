@@ -2,10 +2,8 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
+using System.Linq;
 using System.Threading;
 
 namespace TadScrapper
@@ -50,8 +48,6 @@ namespace TadScrapper
 
         public void Dispose()
         {
-            //this.Driver.Close();
-            //this.Driver.Quit();
             this.Driver.Dispose();
         }
     }
