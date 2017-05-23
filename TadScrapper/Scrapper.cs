@@ -18,7 +18,9 @@ namespace TadScrapper
 
         public Scrapper()
         {
-            this.Driver = new ChromeDriver();
+            var chromeDriverService = ChromeDriverService.CreateDefaultService();
+            chromeDriverService.HideCommandPromptWindow = true;
+            this.Driver = new ChromeDriver(chromeDriverService, new ChromeOptions());
             this.UriBase = new Uri(ConfigurationManager.AppSettings["UriBase"]);
         }
 
@@ -36,19 +38,21 @@ namespace TadScrapper
                 var cells = row.FindElements(By.CssSelector("td"));
                 yield return new TadRecord
                 {
-                    Account = cells[0].Text,
-                    City = cells[2].Text,
-                    Location = cells[1].Text,
+                    Account = cells[0].Text?.Trim(),
+                    City = cells[2].Text?.Trim(),
+                    Location = cells[1].Text?.Trim(),
                     MarketValue = int.Parse(cells[5].Text.Trim(new[] { '$' }).Replace(",", string.Empty)),
-                    OwnerName = cells[3].Text,
-                    Use = cells[4].Text
+                    OwnerName = cells[3].Text?.Trim(),
+                    Use = cells[4].Text?.Trim()
                 };
             }
         }
 
         public void Dispose()
         {
-            this.Driver.Close();
+            //this.Driver.Close();
+            //this.Driver.Quit();
+            this.Driver.Dispose();
         }
     }
 }
