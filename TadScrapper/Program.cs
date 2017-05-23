@@ -19,8 +19,13 @@ namespace TadScrapper
                     resultFileName = filenameParts[0] + DateTime.Now.ToString("yyyy-MM-dd HHmmss") +"."+filenameParts[1];
                 }
 
+                File.AppendAllLines(resultFileName, new[] {
+                                 "Date,Account,Location,City,Owner Name,Use,Market Value $"
+                            });
+
                 using (var scrapper = new Scrapper())
                 {
+
                     foreach (var address in addressFileLines.Skip(1))
                     {
                         var tadRecords = scrapper.ReadTadRecord(address.Split(new[] { ',' })[0]).ToList();
